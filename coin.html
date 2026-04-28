@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Details | CryptoVision</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fa-brands fa-hive"></i> <span>CryptoVision</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html">Search</a>
+            <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="container" id="content-container">
+        <div class="loader-container" id="main-loader"><div class="loader"></div></div>
+        
+        <!-- Content will be injected here by JS -->
+    </div>
+
+    <!-- Template for Coin Data -->
+    <template id="coin-template">
+        <div class="glass-card mb-4">
+            <div class="detail-header">
+                <img src="" id="coin-image" alt="Coin Image" class="detail-icon">
+                <div class="detail-title">
+                    <h1><span id="coin-name">Coin Name</span> <span class="detail-badge" id="coin-symbol">SYM</span></h1>
+                    <div style="margin-top: 0.5rem; opacity: 0.8;">Rank #<span id="coin-rank">-</span></div>
+                </div>
+                <button class="fav-btn" id="fav-btn" style="margin-left: auto; font-size: 2rem;">
+                    <i class="fas fa-star"></i>
+                </button>
+            </div>
+
+            <!-- Price in 4 Currencies -->
+            <div class="price-grid">
+                <div class="price-box glass-card" style="background: rgba(59, 130, 246, 0.1);">
+                    <h3>USD</h3>
+                    <p id="price-usd">$0.00</p>
+                </div>
+                <div class="price-box glass-card" style="background: rgba(139, 92, 246, 0.1);">
+                    <h3>EUR</h3>
+                    <p id="price-eur">€0.00</p>
+                </div>
+                <div class="price-box glass-card" style="background: rgba(245, 158, 11, 0.1);">
+                    <h3>BTC</h3>
+                    <p id="price-btc">0.00</p>
+                </div>
+                <div class="price-box glass-card" style="background: rgba(16, 185, 129, 0.1);">
+                    <h3>ETH</h3>
+                    <p id="price-eth">0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <!-- Left Column: Chart & Description -->
+            <div>
+                <div class="glass-card mb-4">
+                    <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-chart-line"></i> Price History</h2>
+                    <div class="chart-controls">
+                        <button class="chart-btn" data-days="1">24H</button>
+                        <button class="chart-btn active" data-days="7">7D</button>
+                        <button class="chart-btn" data-days="30">30D</button>
+                        <button class="chart-btn" data-days="365">1Y</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card mb-4">
+                    <h2 class="section-title" style="font-size: 1.5rem;">About <span class="about-name"></span></h2>
+                    <div id="coin-description" class="description">
+                        <!-- Description injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Converter -->
+            <div>
+                <div class="glass-card mb-4">
+                    <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-info-circle"></i> Market Stats</h2>
+                    <div class="market-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Market Cap</span>
+                            <span class="stat-value" id="stat-mcap">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Volume (24h)</span>
+                            <span class="stat-value" id="stat-vol">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Circulating Supply</span>
+                            <span class="stat-value" id="stat-supply">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Supply</span>
+                            <span class="stat-value" id="stat-max-supply">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">All Time High</span>
+                            <span class="stat-value" id="stat-ath">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">All Time Low</span>
+                            <span class="stat-value" id="stat-atl">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-exchange-alt"></i> Converter</h2>
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">Convert <span class="about-symbol"></span> to USD</p>
+                    <div class="converter">
+                        <input type="number" id="convert-coin" value="1" min="0">
+                        <span style="font-weight: bold; font-size: 1.2rem;" class="about-symbol">SYM</span>
+                    </div>
+                    <div style="text-align: center; margin: 1rem 0; opacity: 0.5;">
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="converter">
+                        <input type="text" id="convert-usd" readonly>
+                        <span style="font-weight: bold; font-size: 1.2rem;">USD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/coin.js"></script>
+</body>
+</html>

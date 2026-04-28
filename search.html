@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | CryptoVision</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fa-brands fa-hive"></i> <span>CryptoVision</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html" class="active">Search</a>
+            <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="glass-card" style="margin-bottom: 2rem;">
+            <form id="search-page-form" class="search-container">
+                <input type="text" id="search-page-input" class="search-input" placeholder="Search for a cryptocurrency (e.g., Ethereum)" required>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </section>
+
+        <section>
+            <h2 id="search-title" class="section-title">Search Results</h2>
+            <div id="search-results" class="grid-3">
+                <!-- Search results injected here -->
+            </div>
+            <div id="loading" class="loader-container" style="display: none;">
+                <div class="loader"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/search.js"></script>
+</body>
+</html>

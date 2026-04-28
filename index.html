@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVision | Explore Crypto</title>
+    <meta name="description" content="Discover, search, and track cryptocurrencies with real-time updates and interactive charts.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fa-brands fa-hive"></i> <span>CryptoVision</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="search.html">Search</a>
+            <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <!-- Real-time Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker" id="crypto-ticker">
+            <!-- Ticker items injected via JS -->
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="hero glass-card">
+            <h1>Discover & Track Crypto</h1>
+            <p>Real-time data, interactive charts, and premium insights for the modern investor.</p>
+            
+            <form id="search-form" class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search for a cryptocurrency (e.g., Bitcoin)" required>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </section>
+
+        <section class="mt-4" style="margin-bottom: 4rem;">
+            <div class="table-header-action">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Cryptocurrency Prices by Market Cap</h2>
+            </div>
+            
+            <div class="glass-card" style="padding: 0; overflow: hidden;">
+                <div class="table-responsive">
+                    <table class="crypto-table" id="market-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-star" style="opacity: 0.5;"></i></th>
+                                <th>#</th>
+                                <th>Coin</th>
+                                <th>Price</th>
+                                <th>24h %</th>
+                                <th>7d %</th>
+                                <th>Market Cap</th>
+                                <th>Volume (24h)</th>
+                                <th>Last 7 Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-table-body">
+                            <tr>
+                                <td colspan="9" class="text-center" style="padding: 3rem;">
+                                    <div class="loader-container"><div class="loader"></div></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="load-more-btn" class="btn-more" style="cursor: pointer; padding: 1rem 2rem; font-size: 1.1rem;">Load More</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/index.js"></script>
+</body>
+</html>
